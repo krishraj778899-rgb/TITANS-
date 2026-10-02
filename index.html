@@ -1,0 +1,1607 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TITANS | Hackathon Team</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #171717;
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           BACKGROUND
+        ========================= */
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -5;
+
+            background:
+                radial-gradient(
+                    circle at 50% 35%,
+                    rgba(255,255,255,0.08),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 15% 30%,
+                    rgba(255,255,255,0.06),
+                    transparent 25%
+                ),
+                linear-gradient(
+                    180deg,
+                    #292929 0%,
+                    #1d1d1d 45%,
+                    #121212 100%
+                );
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -4;
+            opacity: 0.22;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,0.035) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.035) 1px,
+                    transparent 1px
+                );
+
+            background-size: 60px 60px;
+
+            mask-image: linear-gradient(
+                to bottom,
+                black,
+                transparent 80%
+            );
+        }
+
+        /* =========================
+           STARS
+        ========================= */
+
+        .stars,
+        .stars::before,
+        .stars::after {
+            position: fixed;
+            inset: 0;
+            content: "";
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        .stars {
+            background-image:
+                radial-gradient(circle, white 1px, transparent 1.5px),
+                radial-gradient(circle, white 1px, transparent 1.5px),
+                radial-gradient(circle, white 1px, transparent 1.5px),
+                radial-gradient(circle, white 1px, transparent 1.5px);
+
+            background-size:
+                180px 180px,
+                240px 240px,
+                310px 310px,
+                420px 420px;
+
+            background-position:
+                20px 30px,
+                90px 100px,
+                170px 40px,
+                250px 150px;
+
+            opacity: 0.4;
+
+            animation: starsMove 25s linear infinite;
+        }
+
+        .stars::before {
+            background:
+                radial-gradient(
+                    circle at 50% 15%,
+                    rgba(255,255,255,0.8),
+                    transparent 2px
+                ),
+                radial-gradient(
+                    circle at 52% 13%,
+                    rgba(255,255,255,0.6),
+                    transparent 1px
+                ),
+                radial-gradient(
+                    circle at 44% 12%,
+                    rgba(255,255,255,0.5),
+                    transparent 1px
+                );
+        }
+
+        @keyframes starsMove {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(80px);
+            }
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+
+            width: min(940px, 92%);
+            height: 58px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 20px;
+
+            background: rgba(15,15,15,0.78);
+            backdrop-filter: blur(15px);
+
+            border: 1px solid rgba(255,255,255,0.13);
+            border-radius: 0 0 12px 12px;
+
+            box-shadow:
+                0 0 30px rgba(0,0,0,0.35);
+
+            z-index: 1000;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .mini-logo {
+            width: 34px;
+            height: 34px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle at 35% 30%,
+                    #777,
+                    #222 45%,
+                    #080808 75%
+                );
+
+            border: 1px solid #777;
+
+            box-shadow:
+                inset 0 0 10px #000,
+                0 0 10px rgba(255,255,255,0.12);
+
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .brand-text h3 {
+            font-size: 14px;
+            letter-spacing: 4px;
+            font-weight: 800;
+        }
+
+        .brand-text span {
+            display: block;
+            margin-top: 2px;
+
+            font-size: 7px;
+            letter-spacing: 3px;
+
+            color: #777;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 27px;
+
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #999;
+            text-decoration: none;
+
+            font-size: 9px;
+            letter-spacing: 1.5px;
+
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .menu {
+            display: none;
+            color: #aaa;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 100px 20px 70px;
+
+            position: relative;
+        }
+
+        .hero-logo {
+            position: relative;
+
+            width: 90px;
+            height: 90px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 65px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    #aaa 0%,
+                    #555 28%,
+                    #1c1c1c 55%,
+                    #080808 75%
+                );
+
+            border: 2px solid #888;
+
+            box-shadow:
+                0 0 20px rgba(255,255,255,0.15),
+                inset 0 0 25px #000;
+
+            animation: floatingLogo 4s ease-in-out infinite;
+        }
+
+        .hero-logo::before {
+            content: "";
+
+            position: absolute;
+
+            width: 120px;
+            height: 120px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(255,255,255,0.12);
+
+            box-shadow:
+                0 0 25px rgba(255,255,255,0.05);
+        }
+
+        .hero-logo::after {
+            content: "";
+
+            position: absolute;
+
+            width: 5px;
+            height: 5px;
+
+            background: #fff;
+
+            border-radius: 50%;
+
+            box-shadow:
+                -70px -25px 0 1px #aaa,
+                75px 20px 0 1px #777,
+                -45px 65px 0 1px #555,
+                55px -55px 0 1px #999;
+        }
+
+        .logo-symbol {
+            font-size: 34px;
+            font-weight: 900;
+
+            color: #ddd;
+
+            text-shadow:
+                0 0 12px #fff,
+                0 0 25px rgba(255,255,255,0.3);
+        }
+
+        @keyframes floatingLogo {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-10px) rotate(3deg);
+            }
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 8px 15px;
+
+            margin-bottom: 28px;
+
+            border: 1px solid rgba(255,255,255,0.16);
+
+            border-radius: 30px;
+
+            background: rgba(255,255,255,0.045);
+
+            color: #aaa;
+
+            font-size: 9px;
+            letter-spacing: 2px;
+        }
+
+        .badge-dot {
+            width: 5px;
+            height: 5px;
+
+            border-radius: 50%;
+
+            background: #fff;
+
+            box-shadow: 0 0 8px #fff;
+        }
+
+        /* =========================
+           TITLE
+        ========================= */
+
+        .hero-title {
+            position: relative;
+
+            font-size: clamp(58px, 9vw, 125px);
+
+            line-height: 0.86;
+
+            font-weight: 1000;
+
+            letter-spacing: -4px;
+
+            text-transform: uppercase;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #ffffff 0%,
+                    #eeeeee 25%,
+                    #999999 52%,
+                    #333333 100%
+                );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            filter:
+                drop-shadow(0 8px 12px rgba(0,0,0,0.9))
+                drop-shadow(0 0 20px rgba(255,255,255,0.08));
+
+            margin-bottom: 32px;
+
+            animation: titleAppear 1.5s ease forwards;
+        }
+
+        @keyframes titleAppear {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            max-width: 620px;
+
+            color: #999;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+
+            margin-bottom: 38px;
+        }
+
+        .hero-subtitle strong {
+            color: #ccc;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            min-width: 125px;
+
+            padding: 13px 22px;
+
+            border-radius: 30px;
+
+            text-decoration: none;
+
+            font-size: 10px;
+
+            color: #ddd;
+
+            border: 1px solid rgba(255,255,255,0.2);
+
+            background: rgba(255,255,255,0.045);
+
+            transition: 0.35s;
+        }
+
+        .btn:hover {
+            color: #fff;
+
+            border-color: rgba(255,255,255,0.55);
+
+            background: rgba(255,255,255,0.09);
+
+            transform: translateY(-3px);
+        }
+
+        /* =========================
+           SECTIONS
+        ========================= */
+
+        section:not(.hero) {
+            padding: 110px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .section-title h2 {
+            font-size: 40px;
+            letter-spacing: 2px;
+        }
+
+        .section-title h2 span {
+            color: #aaa;
+        }
+
+        .section-title p {
+            color: #777;
+            margin-top: 12px;
+            font-size: 13px;
+        }
+
+        /* =========================
+           ABOUT
+        ========================= */
+
+        .about-grid {
+            max-width: 1050px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .glass-card {
+            padding: 30px;
+
+            background: rgba(255,255,255,0.035);
+
+            border: 1px solid rgba(255,255,255,0.09);
+
+            border-radius: 14px;
+
+            transition: 0.3s;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(255,255,255,0.25);
+            transform: translateY(-5px);
+        }
+
+        .glass-card .icon {
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        .glass-card h3 {
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+
+        .glass-card p {
+            color: #777;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        /* =========================
+           TEAM
+        ========================= */
+
+        .team-grid {
+            max-width: 1200px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 18px;
+        }
+
+        .team-card {
+            padding: 27px 18px;
+
+            text-align: center;
+
+            background: rgba(255,255,255,0.035);
+
+            border: 1px solid rgba(255,255,255,0.09);
+
+            border-radius: 14px;
+
+            transition: 0.3s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .avatar {
+            width: 65px;
+            height: 65px;
+
+            margin: auto auto 16px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    #555,
+                    #111 65%,
+                    #000
+                );
+
+            border: 1px solid #555;
+
+            font-size: 26px;
+        }
+
+        .team-card h3 {
+            font-size: 15px;
+            margin-bottom: 7px;
+        }
+
+        .role {
+            font-size: 10px;
+            letter-spacing: 1px;
+            color: #777;
+        }
+
+        .leader {
+            border-color: rgba(255,255,255,0.35);
+        }
+
+        .leader-label {
+            display: inline-block;
+
+            margin-top: 12px;
+
+            padding: 4px 9px;
+
+            border: 1px solid #444;
+            border-radius: 20px;
+
+            font-size: 8px;
+            color: #aaa;
+            letter-spacing: 1px;
+        }
+
+        /* =========================
+           PROJECTS
+        ========================= */
+
+        .projects-grid {
+            max-width: 1050px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .project-card {
+            min-height: 270px;
+
+            padding: 30px;
+
+            border-radius: 15px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.05),
+                    rgba(255,255,255,0.015)
+                );
+
+            border: 1px solid rgba(255,255,255,0.09);
+
+            transition: 0.35s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .project-icon {
+            font-size: 38px;
+            margin-bottom: 20px;
+        }
+
+        .project-card h3 {
+            font-size: 23px;
+            margin-bottom: 12px;
+        }
+
+        .project-card p {
+            color: #777;
+            font-size: 13px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .status {
+            display: inline-block;
+
+            padding: 6px 11px;
+
+            border-radius: 20px;
+
+            font-size: 8px;
+            letter-spacing: 1px;
+
+            border: 1px solid #444;
+
+            color: #aaa;
+        }
+
+        /* =========================
+           CONTACT
+        ========================= */
+
+        .contact-box {
+            max-width: 700px;
+            margin: auto;
+
+            padding: 35px;
+
+            background: rgba(255,255,255,0.035);
+
+            border: 1px solid rgba(255,255,255,0.09);
+
+            border-radius: 15px;
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 15px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+
+            padding: 14px 16px;
+
+            background: #151515;
+
+            border: 1px solid #333;
+
+            border-radius: 8px;
+
+            color: #fff;
+
+            outline: none;
+
+            font-size: 13px;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #666;
+        }
+
+        .contact-form textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .contact-form button {
+            cursor: pointer;
+
+            padding: 13px;
+
+            border-radius: 25px;
+
+            border: 1px solid #555;
+
+            background: #252525;
+
+            color: #ddd;
+
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .contact-form button:hover {
+            background: #333;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            padding: 35px;
+
+            text-align: center;
+
+            border-top: 1px solid rgba(255,255,255,0.08);
+
+            color: #666;
+
+            font-size: 11px;
+
+            letter-spacing: 1px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media(max-width: 850px) {
+
+            nav {
+                width: 94%;
+            }
+
+            .nav-links {
+                display: none;
+
+                position: absolute;
+
+                top: 60px;
+                left: 0;
+
+                width: 100%;
+
+                flex-direction: column;
+
+                padding: 15px;
+
+                background: rgba(25,25,25,0.98);
+
+                border: 1px solid #333;
+
+                border-radius: 10px;
+
+                gap: 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                padding: 13px;
+                text-align: center;
+            }
+
+            .menu {
+                display: block;
+            }
+
+            .hero-logo {
+                margin-bottom: 45px;
+            }
+
+            .hero-title {
+                font-size: clamp(50px, 15vw, 90px);
+                letter-spacing: -3px;
+            }
+
+            .about-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width: 500px) {
+
+            .brand-text h3 {
+                font-size: 12px;
+            }
+
+            .brand-text span {
+                font-size: 6px;
+            }
+
+            .hero-title {
+                font-size: 55px;
+            }
+
+            .hero-subtitle {
+                font-size: 12px;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section:not(.hero) {
+                padding: 80px 5%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="stars"></div>
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav>
+
+        <div class="nav-brand">
+
+            <div class="mini-logo">
+                T
+            </div>
+
+            <div class="brand-text">
+
+                <h3>TITANS</h3>
+
+                <span>
+                    HACKATHON TEAM
+                </span>
+
+            </div>
+
+        </div>
+
+        <div
+            class="menu"
+            onclick="toggleMenu()"
+        >
+            ☰
+        </div>
+
+        <ul
+            class="nav-links"
+            id="navLinks"
+        >
+
+            <li>
+                <a href="#home">HOME</a>
+            </li>
+
+            <li>
+                <a href="#about">ABOUT</a>
+            </li>
+
+            <li>
+                <a href="#hackathons">HACKATHONS</a>
+            </li>
+
+            <li>
+                <a href="#projects">PROJECTS</a>
+            </li>
+
+            <li>
+                <a href="#team">TEAM</a>
+            </li>
+
+            <li>
+                <a href="#contact">CONTACT</a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <!-- =========================
+         HOME
+    ========================= -->
+
+    <section
+        class="hero"
+        id="home"
+    >
+
+        <div class="hero-logo">
+
+            <div class="logo-symbol">
+                T
+            </div>
+
+        </div>
+
+        <div class="badge">
+
+            <span class="badge-dot"></span>
+
+            ELITE HACKATHON TEAM
+
+        </div>
+
+        <h1 class="hero-title">
+            TITANS
+        </h1>
+
+        <p class="hero-subtitle">
+
+            TITANS is a passionate technology team built by students,
+            for students. We believe in
+            <strong>
+                innovation, creativity, open learning
+            </strong>
+            and building solutions that can make an impact.
+
+        </p>
+
+        <div class="hero-buttons">
+
+            <a
+                href="#projects"
+                class="btn btn-primary"
+            >
+                Explore Journey
+            </a>
+
+            <a
+                href="#team"
+                class="btn"
+            >
+                Meet The Team
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ABOUT
+    ========================= -->
+
+    <section id="about">
+
+        <div class="section-title">
+
+            <h2>
+                ABOUT <span>TITANS</span>
+            </h2>
+
+            <p>
+                Building ideas. Learning together. Creating impact.
+            </p>
+
+        </div>
+
+        <div class="about-grid">
+
+            <div class="glass-card">
+
+                <div class="icon">💡</div>
+
+                <h3>
+                    Innovation
+                </h3>
+
+                <p>
+                    We turn creative ideas into practical technology
+                    solutions for real-world problems.
+                </p>
+
+            </div>
+
+            <div class="glass-card">
+
+                <div class="icon">🚀</div>
+
+                <h3>
+                    Technology
+                </h3>
+
+                <p>
+                    We explore modern technologies and continuously
+                    improve our development skills.
+                </p>
+
+            </div>
+
+            <div class="glass-card">
+
+                <div class="icon">🤝</div>
+
+                <h3>
+                    Teamwork
+                </h3>
+
+                <p>
+                    Every member contributes different skills,
+                    knowledge and ideas to the team.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         HACKATHONS
+    ========================= -->
+
+    <section id="hackathons">
+
+        <div class="section-title">
+
+            <h2>
+                OUR <span>HACKATHONS</span>
+            </h2>
+
+            <p>
+                Challenges that push us to build better.
+            </p>
+
+        </div>
+
+        <div class="projects-grid">
+
+            <div class="project-card">
+
+                <div class="project-icon">
+                    🏆
+                </div>
+
+                <h3>
+                    Hackathon 2026
+                </h3>
+
+                <p>
+                    TITANS is preparing to participate in upcoming
+                    hackathons and build innovative solutions
+                    for real-world problems.
+                </p>
+
+                <span class="status">
+                    COMING SOON
+                </span>
+
+            </div>
+
+            <div class="project-card">
+
+                <div class="project-icon">
+                    ⚡
+                </div>
+
+                <h3>
+                    Future Challenges
+                </h3>
+
+                <p>
+                    More competitions, more ideas and more opportunities
+                    to learn, collaborate and create.
+                </p>
+
+                <span class="status">
+                    FUTURE
+                </span>
+
+            </div>
+
+            <div class="project-card">
+
+                <div class="project-icon">
+                    🧠
+                </div>
+
+                <h3>
+                    Innovation
+                </h3>
+
+                <p>
+                    Our goal is to use technology and teamwork to
+                    create meaningful solutions.
+                </p>
+
+                <span class="status">
+                    EXPLORING
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PROJECTS
+    ========================= -->
+
+    <section id="projects">
+
+        <div class="section-title">
+
+            <h2>
+                OUR <span>PROJECTS</span>
+            </h2>
+
+            <p>
+                From ideas to working products.
+            </p>
+
+        </div>
+
+        <div class="projects-grid">
+
+            <div class="project-card">
+
+                <div class="project-icon">
+                    🚗
+                </div>
+
+                <h3>
+                    AtulRide
+                </h3>
+
+                <p>
+                    A vehicle rental website designed to make
+                    vehicle booking simple, convenient and user-friendly.
+                </p>
+
+                <span class="status">
+                    COMPLETED
+                </span>
+
+            </div>
+
+            <div class="project-card">
+
+                <div class="project-icon">
+                    🏆
+                </div>
+
+                <h3>
+                    Hackathon
+                </h3>
+
+                <p>
+                    A future hackathon project focused on solving
+                    real-world problems using technology.
+                </p>
+
+                <span class="status">
+                    COMING SOON
+                </span>
+
+            </div>
+
+            <div class="project-card">
+
+                <div class="project-icon">
+                    🧪
+                </div>
+
+                <h3>
+                    Innovation Lab
+                </h3>
+
+                <p>
+                    An upcoming space where TITANS will experiment
+                    with new ideas and technologies.
+                </p>
+
+                <span class="status">
+                    FUTURE
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         TEAM
+    ========================= -->
+
+    <section id="team">
+
+        <div class="section-title">
+
+            <h2>
+                MEET THE <span>TITANS</span>
+            </h2>
+
+            <p>
+                The people behind the ideas.
+            </p>
+
+        </div>
+
+        <div class="team-grid">
+
+            <div class="team-card leader">
+
+                <div class="avatar">
+                    👑
+                </div>
+
+                <h3>
+                    Krish Raj
+                </h3>
+
+                <div class="role">
+                    TEAM LEADER
+                </div>
+
+                <span class="leader-label">
+                    TEAM LEADER
+                </span>
+
+            </div>
+
+            <div class="team-card">
+
+                <div class="avatar">⚙️</div>
+
+                <h3>Aman Kumar</h3>
+
+                <div class="role">
+                    BACKEND DEVELOPER
+                </div>
+
+            </div>
+
+            <div class="team-card">
+
+                <div class="avatar">💻</div>
+
+                <h3>Prakhar Kumar</h3>
+
+                <div class="role">
+                    FRONTEND DEVELOPER
+                </div>
+
+            </div>
+
+            <div class="team-card">
+
+                <div class="avatar">📊</div>
+
+                <h3>Manoj Kumar Sahu</h3>
+
+                <div class="role">
+                    PPT & RESEARCH
+                </div>
+
+            </div>
+
+            <div class="team-card">
+
+                <div class="avatar">📑</div>
+
+                <h3>Shubham Kumar</h3>
+
+                <div class="role">
+                    PPT & RESEARCH
+                </div>
+
+            </div>
+
+            <div class="team-card">
+
+                <div class="avatar">🎨</div>
+
+                <h3>Niharika Kumari</h3>
+
+                <div class="role">
+                    FRONTEND DEVELOPER
+                </div>
+
+            </div>
+
+            <div class="team-card">
+
+                <div class="avatar">📝</div>
+
+                <h3>Sakshi Kumari</h3>
+
+                <div class="role">
+                    PPT & RESEARCH
+                </div>
+
+            </div>
+
+            <div class="team-card">
+
+                <div class="avatar">🛠️</div>
+
+                <h3>Roushan Kumar</h3>
+
+                <div class="role">
+                    BACKEND DEVELOPER
+                </div>
+
+            </div>
+
+            <div class="team-card">
+
+                <div class="avatar">🌐</div>
+
+                <h3>Satyam Kumar</h3>
+
+                <div class="role">
+                    FRONTEND DEVELOPER
+                </div>
+
+            </div>
+
+            <div class="team-card">
+
+                <div class="avatar">📚</div>
+
+                <h3>Vivek Kumar</h3>
+
+                <div class="role">
+                    PPT & RESEARCH
+                </div>
+
+            </div>
+
+            <div class="team-card">
+
+                <div class="avatar">🔧</div>
+
+                <h3>Suraj Kumar</h3>
+
+                <div class="role">
+                    BACKEND DEVELOPER
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         REAL CONTACT
+    ========================= -->
+
+    <section id="contact">
+
+        <div class="section-title">
+
+            <h2>
+                CONTACT <span>TITANS</span>
+            </h2>
+
+            <p>
+                Have an idea? Let's build it together.
+            </p>
+
+        </div>
+
+
+        <div class="contact-box">
+
+            <!--
+                IMPORTANT:
+                Replace YOUR_EMAIL@gmail.com
+                with the email where you want to receive messages.
+            -->
+
+            <form
+                class="contact-form"
+                action="https://formsubmit.co/YOUR_EMAIL@gmail.com"
+                method="POST"
+            >
+
+                <!-- FormSubmit Settings -->
+
+                <input
+                    type="hidden"
+                    name="_subject"
+                    value="New Message from TITANS Website"
+                >
+
+                <input
+                    type="hidden"
+                    name="_captcha"
+                    value="false"
+                >
+
+                <input
+                    type="hidden"
+                    name="_template"
+                    value="table"
+                >
+
+                <input
+                    type="hidden"
+                    name="_next"
+                    value="https://formsubmit.co/thank-you"
+                >
+
+
+                <!-- User Information -->
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Your Name"
+                    required
+                >
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Your Email"
+                    required
+                >
+
+                <textarea
+                    name="message"
+                    placeholder="Your Message"
+                    required
+                ></textarea>
+
+
+                <button type="submit">
+                    SEND MESSAGE
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        © 2026 TITANS —
+        HACKATHON • INNOVATION • TECHNOLOGY
+
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        function toggleMenu() {
+
+            document
+                .getElementById("navLinks")
+                .classList
+                .toggle("active");
+
+        }
+
+
+        document
+            .querySelectorAll(".nav-links a")
+            .forEach(function(link) {
+
+                link.addEventListener(
+                    "click",
+                    function() {
+
+                        document
+                            .getElementById("navLinks")
+                            .classList
+                            .remove("active");
+
+                    }
+                );
+
+            });
+
+    </script>
+
+</body>
+</html>
+```
