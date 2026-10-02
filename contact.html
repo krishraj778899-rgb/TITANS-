@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact | TITANS</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #15171a;
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(0, 123, 255, 0.16), transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(140, 0, 255, 0.15), transparent 30%),
+                radial-gradient(circle at 50% 50%, rgba(0, 200, 255, 0.06), transparent 40%);
+            animation: glowMove 8s ease-in-out infinite alternate;
+            z-index: -3;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+            background-size: 45px 45px;
+            animation: gridMove 15s linear infinite;
+            z-index: -2;
+        }
+
+        @keyframes glowMove {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.15);
+            }
+        }
+
+        @keyframes gridMove {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(45px);
+            }
+        }
+
+        /* Navbar */
+        nav {
+            width: 100%;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 17, 20, 0.88);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: #ffffff;
+            text-shadow:
+                0 0 5px #00aaff,
+                0 0 15px #0077ff,
+                0 0 30px #7b00ff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #d9d9d9;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #00b7ff;
+            text-shadow: 0 0 10px rgba(0,183,255,0.7);
+        }
+
+        /* Main */
+        .contact-section {
+            min-height: calc(100vh - 75px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 70px 7%;
+        }
+
+        .contact-container {
+            width: 100%;
+            max-width: 1100px;
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 45px;
+        }
+
+        /* Left */
+        .contact-info {
+            padding: 35px;
+            border: 1px solid rgba(0, 174, 255, 0.2);
+            border-radius: 22px;
+            background: rgba(255,255,255,0.045);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 0 35px rgba(0, 100, 255, 0.08);
+        }
+
+        .contact-info h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #ffffff, #00b7ff, #9b4dff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .contact-info > p {
+            color: #bcbcbc;
+            line-height: 1.7;
+            margin-bottom: 35px;
+        }
+
+        .info-box {
+            display: flex;
+            align-items: center;
+            gap: 17px;
+            margin: 22px 0;
+            padding: 17px;
+            border-radius: 14px;
+            background: rgba(255,255,255,0.045);
+            border: 1px solid rgba(255,255,255,0.07);
+            transition: 0.3s;
+        }
+
+        .info-box:hover {
+            transform: translateX(6px);
+            border-color: rgba(0,183,255,0.4);
+            box-shadow: 0 0 20px rgba(0,183,255,0.1);
+        }
+
+        .info-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0077ff, #8a2be2);
+            font-size: 21px;
+        }
+
+        .info-box h3 {
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .info-box p,
+        .info-box a {
+            color: #aaa;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .info-box a:hover {
+            color: #00b7ff;
+        }
+
+        /* Form */
+        .contact-form {
+            padding: 35px;
+            border-radius: 22px;
+            background: rgba(255,255,255,0.045);
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 0 40px rgba(0,0,0,0.25);
+        }
+
+        .contact-form h2 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .form-subtitle {
+            color: #999;
+            margin-bottom: 28px;
+            font-size: 14px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ddd;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            background: rgba(0,0,0,0.25);
+            color: #ffffff;
+            outline: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus,
+        .input-group textarea:focus {
+            border-color: #00aaff;
+            box-shadow: 0 0 15px rgba(0,170,255,0.15);
+        }
+
+        .input-group textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #0077ff, #8a2be2);
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 0 15px rgba(0,119,255,0.5),
+                0 0 30px rgba(138,43,226,0.3);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #777;
+            font-size: 13px;
+            border-top: 1px solid rgba(255,255,255,0.07);
+        }
+
+        /* Mobile */
+        @media (max-width: 850px) {
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info h1 {
+                font-size: 38px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .contact-section {
+                padding: 45px 5%;
+            }
+
+            .contact-info,
+            .contact-form {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">TITANS</div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#hackathons">Hackathons</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="index.html#team">Team</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- Contact -->
+    <section class="contact-section">
+
+        <div class="contact-container">
+
+            <!-- Contact Information -->
+            <div class="contact-info">
+
+                <h1>Let's Connect</h1>
+
+                <p>
+                    Have a project idea, collaboration opportunity,
+                    or want to connect with TITANS? Send us a message.
+                </p>
+
+                <div class="info-box">
+                    <div class="info-icon">✉</div>
+
+                    <div>
+                        <h3>Email</h3>
+                        <a href="mailto:krishraj778899@gmail.com">
+                            krishraj778899@gmail.com
+                        </a>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-icon">⚡</div>
+
+                    <div>
+                        <h3>Team</h3>
+                        <p>TITANS — Hackathon & Innovation Team</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-icon">🚀</div>
+
+                    <div>
+                        <h3>Projects</h3>
+                        <p>Web Development • Hackathons • Innovation</p>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- Contact Form -->
+            <form
+                class="contact-form"
+                action="https://formsubmit.co/krishraj778899@gmail.com"
+                method="POST"
+            >
+
+                <h2>Send a Message</h2>
+
+                <p class="form-subtitle">
+                    Fill the form and we'll get back to you.
+                </p>
+
+                <!-- FormSubmit Settings -->
+                <input type="hidden" name="_subject" value="New Message from TITANS Website">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+
+                <div class="input-group">
+                    <label for="name">Your Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your name"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Your Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="subject">Subject</label>
+                    <input
+                        type="text"
+                        id="subject"
+                        name="subject"
+                        placeholder="Enter subject"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="message">Message</label>
+                    <textarea
+                        id="message"
+                        name="message"
+                        placeholder="Write your message..."
+                        required
+                    ></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    Send Message 🚀
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        © 2026 TITANS. All Rights Reserved.
+    </footer>
+
+</body>
+</html>

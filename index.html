@@ -1,4 +1,4 @@
-```html
+*
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,70 +16,111 @@
         }
 
         body {
-            background: #171717;
+            background: #020617;
             color: #fff;
             font-family: Arial, Helvetica, sans-serif;
             overflow-x: hidden;
         }
 
         /* =========================
-           BACKGROUND
+           PREMIUM ANIMATED BACKGROUND
         ========================= */
 
         body::before {
             content: "";
             position: fixed;
-            inset: 0;
+            inset: -20%;
             z-index: -5;
 
             background:
                 radial-gradient(
-                    circle at 50% 35%,
-                    rgba(255,255,255,0.08),
-                    transparent 30%
+                    circle at 20% 20%,
+                    rgba(0, 140, 255, 0.22),
+                    transparent 24%
                 ),
                 radial-gradient(
-                    circle at 15% 30%,
-                    rgba(255,255,255,0.06),
+                    circle at 82% 18%,
+                    rgba(130, 0, 255, 0.20),
+                    transparent 25%
+                ),
+                radial-gradient(
+                    circle at 50% 75%,
+                    rgba(0, 210, 255, 0.13),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 90% 85%,
+                    rgba(80, 20, 180, 0.16),
                     transparent 25%
                 ),
                 linear-gradient(
-                    180deg,
-                    #292929 0%,
-                    #1d1d1d 45%,
-                    #121212 100%
+                    135deg,
+                    #020617 0%,
+                    #071329 42%,
+                    #030817 72%,
+                    #09031b 100%
                 );
+
+            animation: backgroundPulse 12s ease-in-out infinite alternate;
         }
 
         body::after {
             content: "";
             position: fixed;
-            inset: 0;
+            inset: -10%;
             z-index: -4;
-            opacity: 0.22;
+            pointer-events: none;
 
-            background-image:
+            background:
                 linear-gradient(
-                    rgba(255,255,255,0.035) 1px,
-                    transparent 1px
+                    115deg,
+                    transparent 0%,
+                    rgba(0, 174, 255, 0.05) 25%,
+                    transparent 45%
                 ),
                 linear-gradient(
-                    90deg,
-                    rgba(255,255,255,0.035) 1px,
-                    transparent 1px
+                    295deg,
+                    transparent 30%,
+                    rgba(150, 0, 255, 0.05) 55%,
+                    transparent 75%
                 );
 
-            background-size: 60px 60px;
+            background-size: 220% 220%, 240% 240%;
+            animation: energyMove 16s linear infinite;
+        }
 
-            mask-image: linear-gradient(
-                to bottom,
-                black,
-                transparent 80%
-            );
+        @keyframes backgroundPulse {
+            0% {
+                transform: scale(1);
+                filter: hue-rotate(0deg);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1.1);
+                filter: hue-rotate(10deg);
+            }
+        }
+
+        @keyframes energyMove {
+            0% {
+                background-position: 0% 50%, 100% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%, 0% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%, 100% 50%;
+            }
         }
 
         /* =========================
-           STARS
+           ANIMATED TECH GRID
         ========================= */
 
         .stars,
@@ -89,60 +130,103 @@
             inset: 0;
             content: "";
             pointer-events: none;
-            z-index: -2;
         }
 
         .stars {
+            z-index: -3;
+
             background-image:
-                radial-gradient(circle, white 1px, transparent 1.5px),
-                radial-gradient(circle, white 1px, transparent 1.5px),
-                radial-gradient(circle, white 1px, transparent 1.5px),
-                radial-gradient(circle, white 1px, transparent 1.5px);
+                linear-gradient(
+                    rgba(0, 174, 255, 0.055) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(0, 174, 255, 0.055) 1px,
+                    transparent 1px
+                );
 
-            background-size:
-                180px 180px,
-                240px 240px,
-                310px 310px,
-                420px 420px;
+            background-size: 70px 70px;
 
-            background-position:
-                20px 30px,
-                90px 100px,
-                170px 40px,
-                250px 150px;
+            mask-image: linear-gradient(
+                to bottom,
+                black 0%,
+                black 65%,
+                transparent 100%
+            );
 
-            opacity: 0.4;
-
-            animation: starsMove 25s linear infinite;
+            animation: gridMove 10s linear infinite;
         }
 
         .stars::before {
+            z-index: -2;
+
             background:
-                radial-gradient(
-                    circle at 50% 15%,
-                    rgba(255,255,255,0.8),
-                    transparent 2px
-                ),
-                radial-gradient(
-                    circle at 52% 13%,
-                    rgba(255,255,255,0.6),
-                    transparent 1px
-                ),
-                radial-gradient(
-                    circle at 44% 12%,
-                    rgba(255,255,255,0.5),
-                    transparent 1px
-                );
+                radial-gradient(circle at 15% 25%, #00aaff 0 1px, transparent 2px),
+                radial-gradient(circle at 30% 70%, #7c3cff 0 1px, transparent 2px),
+                radial-gradient(circle at 50% 35%, #00d9ff 0 1px, transparent 2px),
+                radial-gradient(circle at 72% 20%, #a855f7 0 1px, transparent 2px),
+                radial-gradient(circle at 88% 65%, #00aaff 0 1px, transparent 2px),
+                radial-gradient(circle at 60% 85%, #7c3cff 0 1px, transparent 2px);
+
+            background-size:
+                260px 260px,
+                330px 330px,
+                290px 290px,
+                360px 360px,
+                310px 310px,
+                400px 400px;
+
+            opacity: 0.75;
+            animation: particlesMove 18s linear infinite;
         }
 
-        @keyframes starsMove {
+        .stars::after {
+            z-index: -1;
+
+            background:
+                radial-gradient(
+                    ellipse at center,
+                    transparent 20%,
+                    rgba(0, 0, 0, 0.38) 85%
+                );
+
+            box-shadow:
+                inset 0 0 180px rgba(0, 0, 0, 0.75);
+        }
+
+        @keyframes gridMove {
             from {
-                transform: translateY(0);
+                background-position: 0 0, 0 0;
             }
 
             to {
-                transform: translateY(80px);
+                background-position: 0 140px, 140px 0;
             }
+        }
+
+        @keyframes particlesMove {
+            0% {
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate3d(30px, -35px, 0) scale(1.08);
+            }
+
+            100% {
+                transform: translate3d(-20px, -75px, 0) scale(1);
+            }
+        }
+
+        /* =========================
+           FLOATING GLOW ORBS
+        ========================= */
+
+        .stars {
+            box-shadow:
+                0 0 120px rgba(0, 140, 255, 0.08),
+                0 0 220px rgba(120, 0, 255, 0.06);
         }
 
         /* =========================
@@ -610,6 +694,12 @@
         }
 
         .avatar {
+            position: relative;
+            overflow: hidden;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-shadow: 0 0 12px rgba(255,255,255,0.35);
             width: 65px;
             height: 65px;
 
@@ -633,6 +723,31 @@
 
             font-size: 26px;
         }
+
+        .avatar::before {
+            content: "";
+            position: absolute;
+            inset: 5px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.18);
+        }
+
+        .avatar::after {
+            content: "";
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            top: 7px;
+            right: 8px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 0 12px #fff;
+        }
+
+        .leader-avatar { background: radial-gradient(circle at 35% 30%, #ffffff, #8a8a8a 30%, #303030 62%, #050505 100%); }
+        .backend-avatar { background: radial-gradient(circle at 35% 30%, #8ab4ff, #263d72 35%, #09152e 68%, #02050b 100%); }
+        .frontend-avatar { background: radial-gradient(circle at 35% 30%, #a5eaff, #276b83 35%, #08252f 68%, #02080b 100%); }
+        .research-avatar { background: radial-gradient(circle at 35% 30%, #d6b3ff, #5d397d 35%, #241331 68%, #08030c 100%); }
 
         .team-card h3 {
             font-size: 15px;
@@ -1317,8 +1432,8 @@
 
             <div class="team-card leader">
 
-                <div class="avatar">
-                    👑
+                <div class="avatar leader-avatar">
+                    T
                 </div>
 
                 <h3>
@@ -1337,7 +1452,7 @@
 
             <div class="team-card">
 
-                <div class="avatar">⚙️</div>
+                <div class="avatar backend-avatar">BE</div>
 
                 <h3>Aman Kumar</h3>
 
@@ -1349,7 +1464,7 @@
 
             <div class="team-card">
 
-                <div class="avatar">💻</div>
+                <div class="avatar frontend-avatar">FE</div>
 
                 <h3>Prakhar Kumar</h3>
 
@@ -1361,7 +1476,7 @@
 
             <div class="team-card">
 
-                <div class="avatar">📊</div>
+                <div class="avatar research-avatar">R</div>
 
                 <h3>Manoj Kumar Sahu</h3>
 
@@ -1373,7 +1488,7 @@
 
             <div class="team-card">
 
-                <div class="avatar">📑</div>
+                <div class="avatar research-avatar">R</div>
 
                 <h3>Shubham Kumar</h3>
 
@@ -1385,7 +1500,7 @@
 
             <div class="team-card">
 
-                <div class="avatar">🎨</div>
+                <div class="avatar frontend-avatar">FE</div>
 
                 <h3>Niharika Kumari</h3>
 
@@ -1397,7 +1512,7 @@
 
             <div class="team-card">
 
-                <div class="avatar">📝</div>
+                <div class="avatar research-avatar">R</div>
 
                 <h3>Sakshi Kumari</h3>
 
@@ -1409,7 +1524,7 @@
 
             <div class="team-card">
 
-                <div class="avatar">🛠️</div>
+                <div class="avatar backend-avatar">BE</div>
 
                 <h3>Roushan Kumar</h3>
 
@@ -1421,7 +1536,7 @@
 
             <div class="team-card">
 
-                <div class="avatar">🌐</div>
+                <div class="avatar frontend-avatar">FE</div>
 
                 <h3>Satyam Kumar</h3>
 
@@ -1433,7 +1548,7 @@
 
             <div class="team-card">
 
-                <div class="avatar">📚</div>
+                <div class="avatar research-avatar">R</div>
 
                 <h3>Vivek Kumar</h3>
 
@@ -1445,7 +1560,7 @@
 
             <div class="team-card">
 
-                <div class="avatar">🔧</div>
+                <div class="avatar backend-avatar">BE</div>
 
                 <h3>Suraj Kumar</h3>
 
@@ -1489,7 +1604,7 @@
 
             <form
                 class="contact-form"
-                action="https://formsubmit.co/YOUR_EMAIL@gmail.com"
+                action="https://formsubmit.co/krishraj778899@gmail.com"
                 method="POST"
             >
 
@@ -1512,13 +1627,6 @@
                     name="_template"
                     value="table"
                 >
-
-                <input
-                    type="hidden"
-                    name="_next"
-                    value="https://formsubmit.co/thank-you"
-                >
-
 
                 <!-- User Information -->
 
@@ -1604,4 +1712,3 @@
 
 </body>
 </html>
-```
